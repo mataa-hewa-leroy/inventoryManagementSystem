@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 class AuthController extends Controller
 {
       /**
@@ -14,7 +15,8 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        // $this->middleware('auth:api', ['except' => ['login', 'signup']]);
+        $this->middleware('JWT', ['except' => ['login', 'signup']]);
     }
 
     /**
@@ -27,7 +29,7 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Error in email or password'], 401);
         }
 
         return $this->respondWithToken($token);
@@ -64,7 +66,19 @@ class AuthController extends Controller
     {
         return $this->respondWithToken(auth()->refresh());
     }
-
+    public function signup(Request $request) {
+        $validateData = $request->validate([
+            'email' => 'required|unique:users|max:255',
+            'name' => 'required',
+            'password' => 'required|min:6|confirmed',
+        ]);
+        $data = array();
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['password'] = Hash::make($request->password);
+        DB::table('users')->insert($data);
+        return $this->login($request);
+    }
     /**
      * Get the token array structure.
      *
@@ -76,6 +90,9 @@ class AuthController extends Controller
     {
         return response()->json([
             'access_token' => $token,
+            'name' => auth()->user()->name,
+            'user_id' => auth()->user()->id,
+            'email' => auth()->user()->email,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
