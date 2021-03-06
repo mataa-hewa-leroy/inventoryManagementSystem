@@ -1,6 +1,7 @@
 import Token from "./Token";
 import AppStorage from "./AppStorage";
 class User {
+
     responseAfterLogin(res) {
         const access_token = res.data.access_token
         const username = res.data.name
@@ -16,9 +17,11 @@ class User {
         }
         return false;
     }
+
     loggedIn() {
         return this.hasToken()
     }
+
     name() {
         if(this.loggedIn()){
             return localStorage.getItem('user');
