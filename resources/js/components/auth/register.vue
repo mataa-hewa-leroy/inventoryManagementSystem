@@ -12,7 +12,7 @@
                   </div>
                   <form @submit.prevent="signup">
                     <div class="form-group" >
-                      <input type="text" v-model="form.name" class="form-control" id="exampleInputFirstName" placeholder="Enter Your full Name">
+                      <input type="text" v-model="form.name" class="form-control" id="exampleInputFirstName" placeholder="Enter Your Full Name">
                       <small class="text-danger" v-if="errors.name"> {{errors.name[0]}} </small>
                     </div>
                     <div class="form-group">
