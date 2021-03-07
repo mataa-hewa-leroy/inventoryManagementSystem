@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\EmployeeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -35,3 +36,6 @@ Route::group([
     // Route::post('me', 'AuthController@me');
 
 });
+Route::apiResource('employee',EmployeeController::class);
+
+

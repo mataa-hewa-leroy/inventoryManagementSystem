@@ -45,6 +45,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 import User from './Helpers/User'
 window.User= User;
+
+import Notification from './Helpers/Notification';
+window.Notification = Notification;
+
 const app = new Vue({
     el: '#app',
     router
