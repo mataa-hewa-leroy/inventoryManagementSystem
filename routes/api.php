@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // use Illuminate\Support\Facades\Auth;
@@ -40,5 +41,6 @@ Route::group([
 });
 Route::apiResource('employee',EmployeeController::class);
 Route::apiResource('supplier',SupplierController::class);
+Route::apiResource('category',CategoryController::class);
 
 
