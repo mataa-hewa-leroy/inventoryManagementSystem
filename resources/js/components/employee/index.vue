@@ -29,7 +29,7 @@
                     <tbody>
                       <tr v-for="employee in filterseach" :key="employee.id">
                         <td>{{ employee.name }}</td>
-                        <td> <img :src="employee.photo" id="photo_em" alt="Photo de l'employee"> </td>
+                        <td> <img :src="employee.photo" id="photo_em" alt="Photo of Employee"> </td>
                         <td> {{employee.phone}}  </td>
                         <td> {{employee.salary}} </td>
                         <td> {{employee.joining_date}} </td>
@@ -66,7 +66,7 @@ export default {
     computed: {
         filterseach() {
             return this.employees.filter(employee =>{
-                return employee.name.match(this.searchTerm)
+                return employee.name.toLowerCase().match(this.searchTerm)
             })
         }
     },

@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 // use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\EmployeeController;
+use App\Http\Controllers\Api\SupplierController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,5 +39,6 @@ Route::group([
 
 });
 Route::apiResource('employee',EmployeeController::class);
+Route::apiResource('supplier',SupplierController::class);
 
 
